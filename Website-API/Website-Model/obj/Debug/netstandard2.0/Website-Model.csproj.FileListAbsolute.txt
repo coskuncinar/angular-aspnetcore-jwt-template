@@ -1,0 +1,9 @@
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\bin\Debug\netstandard2.0\Website-Model.deps.json
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\bin\Debug\netstandard2.0\Website-Model.dll
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\bin\Debug\netstandard2.0\Website-Model.pdb
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\obj\Debug\netstandard2.0\Website-Model.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\obj\Debug\netstandard2.0\Website-Model.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\obj\Debug\netstandard2.0\Website-Model.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\obj\Debug\netstandard2.0\Website-Model.AssemblyInfo.cs
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\obj\Debug\netstandard2.0\Website-Model.dll
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-Model\obj\Debug\netstandard2.0\Website-Model.pdb

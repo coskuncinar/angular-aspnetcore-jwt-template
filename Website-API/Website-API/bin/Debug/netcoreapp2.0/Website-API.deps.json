@@ -25,7 +25,9 @@
         "dependencies": {
           "Microsoft.AspNetCore.All": "2.0.3",
           "Microsoft.NETCore.App": "2.0.0",
-          "Website-Bll": "1.0.0"
+          "Website-Bll": "1.0.0",
+          "Website-Dal": "1.0.0",
+          "Website-Model": "1.0.0"
         },
         "runtime": {
           "Website-API.dll": {}
@@ -3796,11 +3798,34 @@
         }
       },
       "Website-Bll/1.0.0": {
+        "dependencies": {
+          "Website-Dal": "1.0.0",
+          "Website-Model": "1.0.0"
+        },
         "runtime": {
           "Website-Bll.dll": {}
         },
         "compile": {
           "Website-Bll.dll": {}
+        }
+      },
+      "Website-Dal/1.0.0": {
+        "dependencies": {
+          "Website-Model": "1.0.0"
+        },
+        "runtime": {
+          "Website-Dal.dll": {}
+        },
+        "compile": {
+          "Website-Dal.dll": {}
+        }
+      },
+      "Website-Model/1.0.0": {
+        "runtime": {
+          "Website-Model.dll": {}
+        },
+        "compile": {
+          "Website-Model.dll": {}
         }
       },
       "Microsoft.NETCore.App/2.0.0": {
@@ -5990,6 +6015,16 @@
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
     },
     "Website-Bll/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Website-Dal/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Website-Model/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

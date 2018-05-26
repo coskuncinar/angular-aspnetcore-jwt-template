@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Website-Dal\Website-Dal.csproj" />
+    <ProjectReference Include="..\Website-Model\Website-Model.csproj" />
+  </ItemGroup>
+
 </Project>

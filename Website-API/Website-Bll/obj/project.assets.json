@@ -25,6 +25,29 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "Website-Dal/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Website-Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Website-Dal.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Website-Dal.dll": {}
+        }
+      },
+      "Website-Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Website-Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Website-Model.dll": {}
+        }
       }
     }
   },
@@ -169,11 +192,23 @@
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "Website-Dal/1.0.0": {
+      "type": "project",
+      "path": "../Website-Dal/Website-Dal.csproj",
+      "msbuildProject": "../Website-Dal/Website-Dal.csproj"
+    },
+    "Website-Model/1.0.0": {
+      "type": "project",
+      "path": "../Website-Model/Website-Model.csproj",
+      "msbuildProject": "../Website-Model/Website-Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "NETStandard.Library >= 2.0.0"
+      "NETStandard.Library >= 2.0.0",
+      "Website-Dal >= 1.0.0",
+      "Website-Model >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -208,7 +243,14 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Admin\\Desktop\\WebTemplate\\angular-aspnetcore-jwt-template\\Website-API\\Website-Dal\\Website-Dal.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\WebTemplate\\angular-aspnetcore-jwt-template\\Website-API\\Website-Dal\\Website-Dal.csproj"
+            },
+            "C:\\Users\\Admin\\Desktop\\WebTemplate\\angular-aspnetcore-jwt-template\\Website-API\\Website-Model\\Website-Model.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\WebTemplate\\angular-aspnetcore-jwt-template\\Website-API\\Website-Model\\Website-Model.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

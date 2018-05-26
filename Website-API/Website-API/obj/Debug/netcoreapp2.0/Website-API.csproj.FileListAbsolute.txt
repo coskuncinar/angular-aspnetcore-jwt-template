@@ -11,3 +11,7 @@ C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\W
 C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-API\obj\Debug\netcoreapp2.0\Website-API.pdb
 C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-API\bin\Debug\netcoreapp2.0\Website-Bll.dll
 C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-API\bin\Debug\netcoreapp2.0\Website-Bll.pdb
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-API\bin\Debug\netcoreapp2.0\Website-Dal.dll
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-API\bin\Debug\netcoreapp2.0\Website-Model.dll
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-API\bin\Debug\netcoreapp2.0\Website-Dal.pdb
+C:\Users\Admin\Desktop\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website-API\bin\Debug\netcoreapp2.0\Website-Model.pdb

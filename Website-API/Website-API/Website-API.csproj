@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Website-Bll\Website-Bll.csproj" />
+    <ProjectReference Include="..\Website-Dal\Website-Dal.csproj" />
+    <ProjectReference Include="..\Website-Model\Website-Model.csproj" />
   </ItemGroup>
 
 </Project>
