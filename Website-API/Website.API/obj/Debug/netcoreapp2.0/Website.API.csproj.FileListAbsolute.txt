@@ -1,0 +1,11 @@
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\obj\Debug\netcoreapp2.0\Website.API.csprojResolveAssemblyReference.cache
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\obj\Debug\netcoreapp2.0\Website.API.csproj.CoreCompileInputs.cache
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\obj\Debug\netcoreapp2.0\Website.API.AssemblyInfoInputs.cache
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\obj\Debug\netcoreapp2.0\Website.API.AssemblyInfo.cs
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\bin\Debug\netcoreapp2.0\Website.API.deps.json
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\bin\Debug\netcoreapp2.0\Website.API.runtimeconfig.json
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\bin\Debug\netcoreapp2.0\Website.API.runtimeconfig.dev.json
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\bin\Debug\netcoreapp2.0\Website.API.dll
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\bin\Debug\netcoreapp2.0\Website.API.pdb
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\obj\Debug\netcoreapp2.0\Website.API.dll
+E:\repos\WebTemplate\angular-aspnetcore-jwt-template\Website-API\Website.API\obj\Debug\netcoreapp2.0\Website.API.pdb
