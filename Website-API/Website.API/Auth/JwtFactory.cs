@@ -13,7 +13,8 @@ namespace Website.API.Auth
     {
         private readonly JwtOptions jwtOptions;
 
-        private ICollection<Token> RefreshTokens { get; set; } = new List<Token>();
+        private ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+        private ICollection<Token> BlackList { get; set; } = new List<Token>();
 
         public JwtFactory(IOptions<JwtOptions> jwtOptions)
         {
@@ -64,7 +65,7 @@ namespace Website.API.Auth
             });
         }
 
-        public Token GenerateRefreshToken(string userName)
+        public Token GenerateRefreshToken(string userName, int id)
         {
             var now = DateTime.UtcNow;
 
@@ -87,8 +88,9 @@ namespace Website.API.Auth
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            var token = new Token()
+            var token = new RefreshToken()
             {
+                Id = id,
                 TokenHash = encodedJwt,
                 ExpiresAt = expiresAt
             };
@@ -98,14 +100,28 @@ namespace Website.API.Auth
             return token;
         }
 
-        public Token RefreshAccessToken(string token)
+        public RefreshToken GetRefreshToken(string token)
         {
-            throw new NotImplementedException();
+            var refreshToken = this.RefreshTokens.SingleOrDefault(x => x.TokenHash == token);
+
+            if (refreshToken == null)
+            {
+                return null;
+            }
+
+            var result = this.BlackList.Any(x => x == refreshToken);
+
+            if(result)
+            {
+                return null;
+            }
+
+            return refreshToken;
         }
 
-        public void RevokeRefreshToken(string token)
+        public void RevokeRefreshToken(RefreshToken token)
         {
-            throw new NotImplementedException();
+            this.RefreshTokens.Remove(token);
         }
 
         private static long ToUnixEpochDate(DateTime date)

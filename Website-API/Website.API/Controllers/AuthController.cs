@@ -11,6 +11,7 @@ using Website.API.Models.Login;
 using System.Security.Claims;
 using Website.API.Auth;
 using Website.API.Helpers;
+using Website.API.Models.Security;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -76,12 +77,52 @@ namespace Website.API.Controllers
                 return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
             }
 
+            var userId = int.Parse(identity.Claims.Single(c => c.Type == "id").Value);
+
             var response = new AuthResponse()
             {
-                id = int.Parse(identity.Claims.Single(c => c.Type == "id").Value),
+                id = userId,
                 access_token = this.jwtFactory.GenerateAccessToken(login.Email, identity),
-                refresh_token = this.jwtFactory.GenerateRefreshToken(login.Email)
+                refresh_token = this.jwtFactory.GenerateRefreshToken(login.Email, userId)
             };
+
+            return new OkObjectResult(response);
+        }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody]RefreshTokenViewModel token)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var oldToken = this.jwtFactory.GetRefreshToken(token.TokenHash);
+
+            if (oldToken == null)
+            {
+                return BadRequest(Errors.AddErrorToModelState("refresh_failure", "Invalid refresh token.", ModelState));
+            }
+
+            var userId = oldToken.Id;
+
+            var user = await this.userManager.FindByIdAsync(userId.ToString());
+
+            var identity = await Task.FromResult(jwtFactory.GenerateClaimsIdentity(user.UserName, user.Id.ToString()));
+
+            if (identity == null)
+            {
+                return BadRequest(Errors.AddErrorToModelState("refresh_failure", "Invalid refresh token.", ModelState));
+            }
+
+            var response = new AuthResponse()
+            {
+                id = user.Id,
+                access_token = this.jwtFactory.GenerateAccessToken(user.UserName, identity),
+                refresh_token = this.jwtFactory.GenerateRefreshToken(user.UserName, userId)
+            };
+
+            this.jwtFactory.RevokeRefreshToken(oldToken);
 
             return new OkObjectResult(response);
         }

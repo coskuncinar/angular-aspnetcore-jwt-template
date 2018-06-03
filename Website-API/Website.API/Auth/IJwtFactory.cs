@@ -9,10 +9,10 @@ namespace Website.API.Auth
     public interface IJwtFactory
     {
         Token GenerateAccessToken(string userName, ClaimsIdentity identity);
-        Token GenerateRefreshToken(string userName);
+        Token GenerateRefreshToken(string userName, int id);
         ClaimsIdentity GenerateClaimsIdentity(string userName, string id);
 
-        Token RefreshAccessToken(string token);
-        void RevokeRefreshToken(string token);
+        RefreshToken GetRefreshToken(string token);
+        void RevokeRefreshToken(RefreshToken token);
     }
 }
