@@ -78,12 +78,14 @@ namespace Website.API.Controllers
             }
 
             var userId = int.Parse(identity.Claims.Single(c => c.Type == "id").Value);
+            var access = this.jwtFactory.GenerateAccessToken(login.Email, identity);
+            var refresh = this.jwtFactory.GenerateRefreshToken(login.Email, userId);
 
             var response = new AuthResponse()
             {
                 id = userId,
-                access_token = this.jwtFactory.GenerateAccessToken(login.Email, identity),
-                refresh_token = this.jwtFactory.GenerateRefreshToken(login.Email, userId)
+                access_token = access,
+                refresh_token = refresh
             };
 
             return new OkObjectResult(response);
@@ -115,11 +117,14 @@ namespace Website.API.Controllers
                 return BadRequest(Errors.AddErrorToModelState("refresh_failure", "Invalid refresh token.", ModelState));
             }
 
+            var access = this.jwtFactory.GenerateAccessToken(user.UserName, identity);
+            var refresh = this.jwtFactory.GenerateRefreshToken(user.UserName, userId);
+
             var response = new AuthResponse()
             {
                 id = user.Id,
-                access_token = this.jwtFactory.GenerateAccessToken(user.UserName, identity),
-                refresh_token = this.jwtFactory.GenerateRefreshToken(user.UserName, userId)
+                access_token = access,
+                refresh_token = refresh
             };
 
             this.jwtFactory.RevokeRefreshToken(oldToken);

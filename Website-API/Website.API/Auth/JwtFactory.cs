@@ -97,7 +97,13 @@ namespace Website.API.Auth
 
             this.RefreshTokens.Add(token);
 
-            return token;
+            var result = new Token()
+            {
+                TokenHash = token.TokenHash,
+                ExpiresAt = token.ExpiresAt
+            };
+
+            return result;
         }
 
         public RefreshToken GetRefreshToken(string token)
