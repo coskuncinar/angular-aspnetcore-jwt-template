@@ -37,25 +37,32 @@ namespace Website.API.Models
             if(!context.Users.Any())
             {
                 var password = config["Admin:Password"];
-                var user = new Website.Model.User()
+                var username = config["Admin:UserName"];
+                var firstName = config["Admin:FirstName"];
+                var lastName = config["Admin:LastName"];
+
+                if(String.IsNullOrEmpty(username) == false && String.IsNullOrEmpty(password) == false)
                 {
-                    UserName = config["Admin:UserName"],
-                    FirstName = config["Admin:FirstName"],
-                    LastName = config["Admin:LastName"]
-                };
+                    var user = new Website.Model.User()
+                    {
+                        UserName = username,
+                        FirstName = firstName,
+                        LastName = lastName
+                    };
 
-                userManager.CreateAsync(user, password);
+                    userManager.CreateAsync(user, password);
 
-                var roleId = context.Roles.SingleOrDefault(x => x.Name == Roles.Roles.Administrator).Id;
-                var userId = context.Users.SingleOrDefault(x => x.UserName == user.UserName).Id;
+                    var roleId = context.Roles.SingleOrDefault(x => x.Name == Roles.Roles.Administrator).Id;
+                    var userId = context.Users.SingleOrDefault(x => x.UserName == user.UserName).Id;
 
-                context.UserRoles.Add(new UserRole()
-                {
-                    RoleId = roleId,
-                    UserId = userId
-                });
+                    context.UserRoles.Add(new UserRole()
+                    {
+                        RoleId = roleId,
+                        UserId = userId
+                    });
 
-                context.SaveChanges();
+                    context.SaveChanges();
+                }
             }
         }
     }
