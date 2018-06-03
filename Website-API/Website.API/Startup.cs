@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Website.Dal;
 using Website.Model;
 using Website.Dal.Stores;
+using AutoMapper;
+using FluentValidation.AspNetCore;
 
 namespace Website.API
 {
@@ -22,7 +24,6 @@ namespace Website.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             services.AddDbContext<CoreDbContext>(options => options.UseSqlite(this.Configuration.GetConnectionString("Development")));
             services.AddIdentity<User, UserRole>()
                 .AddDefaultTokenProviders();
@@ -30,12 +31,8 @@ namespace Website.API
             services.AddTransient<IUserStore<User>, UserStore>();
             services.AddTransient<IRoleStore<UserRole>, RoleStore>();
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.LoginPath = "/Login";
-                options.LogoutPath = "/Logout";
-            });
+            services.AddAutoMapper();
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
