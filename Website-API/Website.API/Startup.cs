@@ -1,19 +1,24 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Net;
+using System.Text;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Website.Dal;
-using Website.Model;
-using Website.Dal.Stores;
 using AutoMapper;
 using FluentValidation.AspNetCore;
-using Website.API.Auth;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Tokens;
+using Website.Dal;
+using Website.Model;
+using Website.API.Auth;
+using Website.Dal.Stores;
+using Website.API.Extensions;
 
 namespace Website.API
 {
@@ -30,11 +35,11 @@ namespace Website.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CoreDbContext>(options => options.UseSqlite(this.Configuration.GetConnectionString("Development")));
-            services.AddIdentity<User, UserRole>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<User, UserRole>().AddDefaultTokenProviders();
 
             services.AddTransient<IUserStore<User>, UserStore>();
             services.AddTransient<IRoleStore<UserRole>, RoleStore>();
+            services.AddSingleton<IJwtFactory, JwtFactory>();
 
             var jwtAppSettingOptions = Configuration.GetSection("JwtIssuerOptions");
 
@@ -68,6 +73,7 @@ namespace Website.API
 
             services.AddAuthentication(options =>
             {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
@@ -76,6 +82,7 @@ namespace Website.API
                 configureOptions.ClaimsIssuer = jwtAppSettingOptions["Issuer"];
                 configureOptions.TokenValidationParameters = tokenValidationParameters;
                 configureOptions.SaveToken = true;
+                configureOptions.IncludeErrorDetails = true;
             });
 
             services.AddAuthorization(options =>
@@ -84,6 +91,7 @@ namespace Website.API
             });
 
             services.AddAutoMapper();
+            services.AddCors();
             services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
@@ -95,6 +103,25 @@ namespace Website.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseExceptionHandler(
+              builder =>
+              {
+                  builder.Run(
+                    async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message).ConfigureAwait(false);
+                        }
+                    });
+              });
+
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
