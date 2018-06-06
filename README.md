@@ -11,3 +11,5 @@
 2. Set default **Admin** account(this will be created on first start)
     * Only **UserName** and **Password** fields are required
 3. Set 256-bit **SecretKey** inside **JwtIssuerOptions**
+4. Inside Website.Ui project
+    * Set the right address inside **eviroments**
