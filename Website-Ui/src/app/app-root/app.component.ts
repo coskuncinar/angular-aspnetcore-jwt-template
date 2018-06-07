@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
     ngOnInit() : void {
         this
             .auth
-            .login(new LoginModel({Email: 'eduard.brown123@hotmail.com', Password: 'Edik.001'}));
+            .login(new LoginModel({Email: 'THE EMAIL', Password: 'PASSWORD'}));
     }
 
     OnClick() {
